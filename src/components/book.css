@@ -1,0 +1,59 @@
+div.book {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+div.book-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 90vh;
+    width: 35vw;
+    background-color: tomato;
+    top: 5vh;
+    position: absolute;
+    -moz-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-transform-origin: left;
+    -moz-transform-origin: left;
+    -o-transform-origin: left;
+    transform-origin: left;
+    /* animation-name: flip; */
+    /* animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse; */
+}
+
+@keyframes flip {
+    from {transform: rotateY(0.5turn)}
+    to {transform: rotateY(0turn)}
+}
+
+div.book-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 90vh;
+    width: 35vw;
+    background-color: beige;
+    top: 5vh;
+    position: absolute;
+    -moz-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-transform-origin: left;
+    -moz-transform-origin: left;
+    -o-transform-origin: left;
+    transform-origin: left;
+    /* animation-name: flip; */
+    /* animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse; */
+}
