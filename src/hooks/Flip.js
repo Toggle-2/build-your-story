@@ -66,14 +66,14 @@ const useFlip = () => {
 
   const mouseMoveHandler = useCallback(
     (e) => {
-        setEndPoint({ x: e.screenX, y: e.screenY });
+      setEndPoint({ x: e.screenX, y: e.screenY });
     },
     [endPoint, swiping]
   );
 
   const mouseUpHandler = useCallback(
     (e) => {
-        setEndPoint({ x: e.screenX, y: e.screenY });
+      setEndPoint({ x: e.screenX, y: e.screenY });
       setSwiping(false);
     },
     [swiping]
@@ -99,15 +99,12 @@ const useFlip = () => {
 
     document.addEventListener("touchend", touchEndHandler, { passive: true });
 
-    document.addEventListener("touchcancel", touchCancel, { passive: true });
-
     document.addEventListener("mousedown", mouseDownHandler, { passive: true });
 
     document.addEventListener("mousemove", mouseMoveHandler, { passive: true });
 
     document.addEventListener("mouseup", mouseUpHandler, { passive: true });
 
-    document.addEventListener("mouseleave", mouseCancel, { passive: true });
   }, []);
 
   const unmountFlip = useCallback(() => {
@@ -117,15 +114,12 @@ const useFlip = () => {
 
     document.removeEventListener("touchend", touchEndHandler);
 
-    document.removeEventListener("touchcancel", touchCancel);
-
     document.removeEventListener("mousedown", mouseDownHandler);
 
     document.removeEventListener("mousemove", mouseMoveHandler);
 
     document.removeEventListener("mouseup", mouseUpHandler);
 
-    document.removeEventListener("mouseleave", mouseCancel);
   }, []);
 
   return {

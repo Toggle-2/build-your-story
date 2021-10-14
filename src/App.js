@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
 import Book from "./components/Book";
@@ -11,7 +10,12 @@ function App() {
   const view = [
     <Book
       title="Your Story"
-      pages={[{ _id: 0, body: "Your story is unique!" }]}
+      pages={[
+        { _id: 1, body: "Your story is unique!" },
+        { _id: 2, body: "Your story is unique!" },
+        { _id: 3, body: "Your story is unique!" },
+        { _id: 4, body: "Your story is unique!" },
+      ]}
     />,
     <BookBuilder />,
   ];
@@ -22,15 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header" style={{ top: toolbar ? "-10vh" : "" }}>
-        <button className="toolbar-button" onClick={toggleToolbar} />
-      </header>
-
-      <div className="App-body" style={{ top: toolbar ? "-10vh" : "" }}>
-        <button className="toolbar-button" onClick={toggleToolbar} />
-        {view[component]}
-      </div>
-
+      <div className="App-body">{view[component]}</div>
     </div>
   );
 }

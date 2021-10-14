@@ -1,0 +1,124 @@
+.book {
+  position: absolute;
+  -webkit-transform-origin: bottom;
+  -moz-transform-origin: bottom;
+  -o-transform-origin: bottom;
+  transform-origin: bottom;
+  /* transition-duration: 1s; */
+  transition: ease-in-out 1s;
+  /* transition-delay: 1s; */
+}
+
+.bookCover {
+  display: block;
+  height: 90vmin;
+  width: 70vmin;
+  background-color: tomato;
+  border-right: 4px solid rgb(209, 82, 59);
+  border-inline-start: 4px solid rgb(209, 82, 59);
+  top: 5vh;
+  position: absolute;
+  z-index: 2;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  /* transition-duration: 2s; */
+  -moz-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-transform-origin: left;
+  -moz-transform-origin: left;
+  -o-transform-origin: left;
+  transform-origin: left;
+  /* animation-name: flip;
+    animation-duration: 2000ms;
+    animation-iteration-count: 1;
+    animation-direction: alternate-reverse; */
+}
+
+.bookCover h2 {
+  font-size: 6vmin;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20vmin;
+}
+
+.bookCover img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bookCover.closed {
+  transform: rotateY(0turn);
+}
+
+.bookCover.open {
+  transform: rotateY(0.5turn);
+}
+
+@keyframes flip {
+  from {
+    transform: rotateY(0.5turn);
+  }
+  to {
+    transform: rotateY(0turn);
+  }
+}
+
+.bookPage {
+    display: grid;
+    height: 90vmin;
+    width: 70vmin;
+    background-color: beige;
+    border-right: 1px solid rgb(233, 233, 212);
+    border-inline-start: 1px solid rgb(216, 216, 200);
+    top: 5vh;
+    position: absolute;
+    z-index: 1;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    /* transition-duration: 2s; */
+    -moz-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-transform-origin: left;
+    -moz-transform-origin: left;
+    -o-transform-origin: left;
+    transform-origin: left;
+  /* animation-name: flip; */
+  /* animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse; */
+}
+
+.promptMessage {
+  font-size: 10vmin;
+  position: absolute;
+  top: 40%;
+  left: 25%;
+  text-shadow: 2px 2px black;
+  z-index: 3;
+  animation: bounce;
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes bounce {
+  from {
+    font-size: 6vmin;
+    color: goldenrod;
+    left: 33%;
+  }
+  to {
+    font-size: 5vmin;
+    color: gold;
+    left: 36%;
+  }
+}

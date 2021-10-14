@@ -2,41 +2,14 @@
   overflow: hidden;
 }
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  position: relative;
-  /* top: -10vh; */
-  font-size: calc(10px + 2vmin);
-  color: white;
-  transition-duration: 200ms;
-}
-
-header button {
-  height: 50px;
-  width: 50px;
-}
+} */
 
 .App-body {
-  background: url("./assets/wood.png");
+  background: url("./assets/wood.png") top repeat ;
   min-height: 100vh;
   min-width: 100vw;
   /* top: -10vh; */
