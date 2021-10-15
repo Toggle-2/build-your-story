@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useDimensions from "../hooks/Dimensions";
 import useFlip from "../hooks/Flip";
 import classes from "./book.module.css";
 
-const Book = (props) => {
-  const [activeFlip, setActiveFlip] = useState(0);
-  const [activated, setActivated] = useState(false);
-  const [swapContent, setSwapContent] = useState([false]);
+type Page = { _id: number; body: string };
+
+interface BookProps {
+  title: string;
+  pages: Array<Page>;
+}
+
+const Book: React.FC<BookProps> = (props) => {
+  const [activeFlip, setActiveFlip] = useState<number>(0);
+  const [activated, setActivated] = useState<boolean>(false);
+  const [showContent, setShowContent] = useState<Array<boolean>>([true]);
   // const [status, setStatus] = useState("open");
   const [currentPage, setCurrentPage] = useState(0);
   const { width, height } = useDimensions();
@@ -20,13 +27,28 @@ const Book = (props) => {
     unmountFlip,
   } = useFlip();
 
+  const generatePageBoolys = useCallback(
+    (booly: boolean) => {
+      switch (booly) {
+        case true:
+          const showPages = props.pages.map(() => {
+            return true;
+          });
+          return showPages;
+        case false:
+          const hidePages = props.pages.map(() => {
+            return false;
+          });
+          return hidePages;
+        default:
+          return showContent;
+      }
+    },
+    [showContent]
+  );
+
   useEffect(() => {
-    setSwapContent(
-      props.pages.map(() => {
-        return false;
-      })
-    );
-    console.log(swapContent)
+    setShowContent(generatePageBoolys(true));
   }, []);
 
   useEffect(() => {
@@ -55,9 +77,12 @@ const Book = (props) => {
   useEffect(() => {
     const removeTitle = setTimeout(() => {
       if (activated) {
-        setSwapContent([true]);
+        const newArray = generatePageBoolys(true);
+
+        newArray[0] = false;
+        setShowContent([...newArray]);
       }
-    }, 550);
+    }, 520);
     return () => clearTimeout(removeTitle);
   }, [activated]);
 
@@ -66,17 +91,19 @@ const Book = (props) => {
   }, [startPoint]);
 
   const pageClickHandler = () => {
-    console.log("PAGE CLICKED HERE!", startPoint, swiping)
+    console.log("PAGE CLICKED HERE!", startPoint, swiping);
   };
 
-  // useEffect(() => {
-  //   console.log("DRAGGING PATH", endPoint)
-  // }, [endPoint])
+  useEffect(() => {
+    console.log("PAGES TO SHOW", showContent);
+  }, [showContent]);
 
   return (
     <>
       {!activated && (
-        <h1 className={classes.promptMessage}>Tap your story to begin!</h1>
+        <div id={classes.promptHolder}>
+          <h1 className={classes.promptMessage}>Tap your story to begin!</h1>
+        </div>
       )}
       <div
         className={classes.book}
@@ -90,12 +117,12 @@ const Book = (props) => {
           className={classes.bookCover}
           style={{
             transitionDuration: "2s",
-            transform: activated ? "rotateY(0.5turn)" : "",
+            transform: activated ? "rotateY(.5turn)" : "",
           }}
         >
-          {!swapContent[0] && (
+          {showContent[0] && (
             <>
-              <h2>Title of Book!</h2>
+              <h2 /*style={{fontFamily: selectedFont}}*/>{props.title}</h2>
               <img src="" alt="Please ensure JavaScript is active." />
             </>
           )}
@@ -103,8 +130,13 @@ const Book = (props) => {
 
         {props.pages.map((page) => {
           return (
-            <div className={classes.bookPage} onMouseUp={() => console.log("UP!", endPoint)} onMouseDown={pageClickHandler} key={page._id}>
-              {!swapContent[page._id] && (
+            <div
+              className={classes.bookPage}
+              onMouseUp={() => console.log("UP!", endPoint, swiping)}
+              onMouseDown={pageClickHandler}
+              key={page._id}
+            >
+              {showContent[page._id] && (
                 <>
                   <img src="" alt="Please ensure JavaScript is active." />
                   {page.body}

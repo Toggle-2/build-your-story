@@ -1,3 +1,5 @@
+@import "../fonts.css";
+
 .book {
   position: absolute;
   -webkit-transform-origin: bottom;
@@ -6,13 +8,38 @@
   transform-origin: bottom;
   /* transition-duration: 1s; */
   transition: ease-in-out 1s;
+  -moz-transition: ease-in-out 1s;
+  -o-transition: ease-in-out 1s;
   /* transition-delay: 1s; */
+}
+
+@media only screen and (max-width: 1249px) {
+  .book {
+    top: 10vh;
+  }
+  .bookPage {
+    height: 70vmin;
+    width: 50vmin;
+  }
+  .bookCover{
+    height: 70vmin;
+    width: 50vmin;
+  }
+}
+
+@media only screen and (min-width: 1250px) {
+  .bookPage {
+    height: 90vmin;
+    width: 70vmin;
+  }
+  .bookCover{
+    height: 90vmin;
+    width: 70vmin;
+  }
 }
 
 .bookCover {
   display: block;
-  height: 90vmin;
-  width: 70vmin;
   background-color: tomato;
   border-right: 4px solid rgb(209, 82, 59);
   border-inline-start: 4px solid rgb(209, 82, 59);
@@ -21,7 +48,7 @@
   z-index: 2;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
-  /* transition-duration: 2s; */
+  transition-duration: 2s;
   -moz-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -30,14 +57,10 @@
   -moz-transform-origin: left;
   -o-transform-origin: left;
   transform-origin: left;
-  /* animation-name: flip;
-    animation-duration: 2000ms;
-    animation-iteration-count: 1;
-    animation-direction: alternate-reverse; */
 }
 
 .bookCover h2 {
-  font-size: 6vmin;
+  font-size: 8vmin;
   color: black;
   display: flex;
   align-items: center;
@@ -71,38 +94,41 @@
 }
 
 .bookPage {
-    display: grid;
-    height: 90vmin;
-    width: 70vmin;
-    background-color: beige;
-    border-right: 1px solid rgb(233, 233, 212);
-    border-inline-start: 1px solid rgb(216, 216, 200);
-    top: 5vh;
-    position: absolute;
-    z-index: 1;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
-    /* transition-duration: 2s; */
-    -moz-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-transform-origin: left;
-    -moz-transform-origin: left;
-    -o-transform-origin: left;
-    transform-origin: left;
+  display: grid;
+  background-color: beige;
+  border-right: 1px solid rgb(233, 233, 212);
+  border-inline-start: 1px solid rgb(216, 216, 200);
+  top: 5vh;
+  position: absolute;
+  z-index: 1;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  transition-duration: 2s;
+  -moz-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-transform-origin: left;
+  -moz-transform-origin: left;
+  -o-transform-origin: left;
+  transform-origin: left;
   /* animation-name: flip; */
   /* animation-duration: 2000ms;
     animation-iteration-count: infinite;
     animation-direction: alternate-reverse; */
 }
 
+#promptHolder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .promptMessage {
   font-size: 10vmin;
   position: absolute;
-  top: 40%;
-  left: 25%;
   text-shadow: 2px 2px black;
+  top: 35vh;
   z-index: 3;
   animation: bounce;
   animation-duration: 500ms;
@@ -112,13 +138,11 @@
 
 @keyframes bounce {
   from {
-    font-size: 6vmin;
+    font-size: 2.8em;
     color: goldenrod;
-    left: 33%;
   }
   to {
-    font-size: 5vmin;
+    font-size: 2.5em;
     color: gold;
-    left: 36%;
   }
 }

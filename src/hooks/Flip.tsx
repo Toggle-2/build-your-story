@@ -31,6 +31,7 @@ const useFlip = () => {
 
   const touchMoveHandler = useCallback(
     (e) => {
+      setSwiping(true);
       setEndPoint({ x: e.touches[0].screenX, y: e.touches[0].screenY });
     },
     [endPoint]

@@ -2,12 +2,6 @@
   overflow: hidden;
 }
 
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
-
 .App-body {
   background: url("./assets/wood.png") top repeat ;
   min-height: 100vh;
