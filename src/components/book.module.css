@@ -1,21 +1,22 @@
 @import "../fonts.css";
 
 .book {
-  position: absolute;
+  position: relative;
   -webkit-transform-origin: bottom;
   -moz-transform-origin: bottom;
   -o-transform-origin: bottom;
   transform-origin: bottom;
-  /* transition-duration: 1s; */
   transition: ease-in-out 1s;
   -moz-transition: ease-in-out 1s;
   -o-transition: ease-in-out 1s;
-  /* transition-delay: 1s; */
 }
 
 @media only screen and (max-width: 1249px) {
   .book {
     top: 10vh;
+  }
+  .book img {
+    height: 35vmin;
   }
   .bookPage {
     height: 70vmin;
@@ -28,6 +29,12 @@
 }
 
 @media only screen and (min-width: 1250px) {
+  .book img {
+    max-height: 600px;
+    height: 50vmin;
+    transition-duration: 2s;
+    /* z-index: 1; */
+  }
   .bookPage {
     height: 90vmin;
     width: 70vmin;
@@ -39,13 +46,13 @@
 }
 
 .bookCover {
-  display: block;
+  display: grid;
   background-color: tomato;
   border-right: 4px solid rgb(209, 82, 59);
   border-inline-start: 4px solid rgb(209, 82, 59);
   top: 5vh;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
   transition-duration: 2s;
@@ -60,20 +67,25 @@
 }
 
 .bookCover h2 {
-  font-size: 8vmin;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  /* font-size: 8vmin; */
   color: black;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 20vmin;
 }
 
 .bookCover img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .bookCover.closed {
@@ -94,13 +106,12 @@
 }
 
 .bookPage {
-  display: grid;
+  overflow: hidden;
   background-color: beige;
   border-right: 1px solid rgb(233, 233, 212);
   border-inline-start: 1px solid rgb(216, 216, 200);
   top: 5vh;
   position: absolute;
-  z-index: 1;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
   transition-duration: 2s;
@@ -112,10 +123,20 @@
   -moz-transform-origin: left;
   -o-transform-origin: left;
   transform-origin: left;
-  /* animation-name: flip; */
-  /* animation-duration: 2000ms;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse; */
+}
+
+.bookPage img {
+  position: absolute;
+  z-index: 2;
+}
+
+.bookPage p {
+  position: absolute;
+  /* z-index: 2; */
+  text-align: left;
+  margin: 0 0 0 5vmin;
+  font-size: 2vmin;
+  top: 60%;
 }
 
 #promptHolder {
@@ -130,19 +151,41 @@
   text-shadow: 2px 2px black;
   top: 35vh;
   z-index: 3;
-  animation: bounce;
   animation-duration: 500ms;
   animation-iteration-count: infinite;
   animation-direction: alternate-reverse;
 }
 
-@keyframes bounce {
+@media only screen and (max-width: 509px) {
+  .promptMessage {
+    animation-name: bounce-small;
+  }
+}
+
+@media only screen and (min-width: 510px) {
+  .promptMessage {
+    animation-name: bounce-large;
+  }
+}
+
+@keyframes bounce-large {
   from {
     font-size: 2.8em;
     color: goldenrod;
   }
   to {
     font-size: 2.5em;
+    color: gold;
+  }
+}
+
+@keyframes bounce-small {
+  from {
+    font-size: 2.5em;
+    color: goldenrod;
+  }
+  to {
+    font-size: 2em;
     color: gold;
   }
 }

@@ -1,9 +1,9 @@
 :root {
   overflow: hidden;
+  background: url("./assets/wood.png") top repeat ;
 }
 
 .App-body {
-  background: url("./assets/wood.png") top repeat ;
   min-height: 100vh;
   min-width: 100vw;
   /* top: -10vh; */

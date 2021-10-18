@@ -17,6 +17,10 @@
 .env.development.local
 .env.test.local
 .env.production.local
+/src/assets/IMG_0329.jpeg
+/src/assets/IMG_0719.jpeg
+/src/assets/IMG_1038.jpeg
+/src/assets/IMG_1310.jpeg
 
 npm-debug.log*
 yarn-debug.log*
