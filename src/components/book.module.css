@@ -47,12 +47,13 @@
 
 .bookCover {
   display: grid;
+  overflow: hidden;
   background-color: tomato;
   border-right: 4px solid rgb(209, 82, 59);
   border-inline-start: 4px solid rgb(209, 82, 59);
   top: 5vh;
   position: absolute;
-  z-index: 3;
+  /* z-index: ; */
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
   transition-duration: 2s;
@@ -126,8 +127,12 @@
 }
 
 .bookPage img {
+  transition-duration: 2s;
   position: absolute;
   z-index: 2;
+  top: 10%;
+  left: 2.5%;
+  /* right: auto; */
 }
 
 .bookPage p {
@@ -136,7 +141,7 @@
   text-align: left;
   margin: 0 0 0 5vmin;
   font-size: 2vmin;
-  top: 60%;
+  top: 67.5%;
 }
 
 #promptHolder {

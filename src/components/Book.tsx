@@ -24,17 +24,12 @@ const Book: React.FC<BookProps> = (props) => {
     unmountFlip,
   } = useFlip();
 
+  const { pages } = props;
+
   useEffect(() => {
     mountFlip();
     return () => unmountFlip();
   }, []);
-
-  const coverClickHandler = () => {
-    setActivated(true);
-    // setTimeout(() => {
-    //   setCurrentPage(1);
-    // }, 550);
-  };
 
   useEffect(() => {
     const hideContent = setTimeout(() => {
@@ -46,32 +41,45 @@ const Book: React.FC<BookProps> = (props) => {
   }, [activated]);
 
   const pageClickHandler = () => {
-    if (
+    const clickNextBottomCorner =
       startPoint.y > innerDimensions.height * 0.5 &&
-      startPoint.x > innerDimensions.width * 0.5
-    ) {
-      console.log("NEXT_BOTTOM_CORNER");
-    } else if (
+      startPoint.x > innerDimensions.width;
+    const clickNextTopCorner =
       startPoint.y < innerDimensions.height * 0.5 &&
-      startPoint.x < innerDimensions.width * 0.5
-    ) {
-      console.log("PREV_TOP_CORNER");
-    } else if (
+      startPoint.x > innerDimensions.width * 0.5;
+    const clickPrevTopCorner =
+      startPoint.y < innerDimensions.height * 0.5 &&
+      startPoint.x < innerDimensions.width * 0.5;
+    const clickPrevBottomCorner =
       startPoint.y > innerDimensions.height * 0.5 &&
-      startPoint.x < innerDimensions.width * 0.5
-    ) {
-      console.log("PREV_BOTTOM_CORNER");
-    } else if (
-      startPoint.y < innerDimensions.height * 0.5 &&
-      startPoint.x > innerDimensions.width * 0.5
-    ) {
-      console.log("NEXT_TOP_CORNER");
+      startPoint.x < innerDimensions.width * 0.5;
+
+    if (currentPage === 0) {
+      setActivated(true)
+    } else {
+      if (clickNextBottomCorner) {
+        console.log("NEXT_BOTTOM_CORNER");
+        if (currentPage !== pages.length - 1) {
+          setCurrentPage(currentPage + 1);
+        }
+      } else if (clickNextTopCorner) {
+        console.log("NEXT_TOP_CORNER");
+        if (currentPage !== pages.length - 1) {
+          setCurrentPage(currentPage + 1);
+        }
+      } else if (clickPrevTopCorner) {
+        console.log("PREV_TOP_CORNER");
+        if (currentPage !== 1) {
+          setCurrentPage(currentPage - 1);
+        }
+      } else if (clickPrevBottomCorner) {
+        console.log("PREV_BOTTOM_CORNER");
+        if (currentPage !== 1) {
+          setCurrentPage(currentPage - 1);
+        }
+      }
     }
   };
-
-  // useEffect(() => {
-  //   console.log("CURRENT_PAGE", currentPage)
-  // }, [currentPage])
 
   return (
     <>
@@ -82,31 +90,32 @@ const Book: React.FC<BookProps> = (props) => {
       )}
       <div
         className={classes.book}
-        onClick={coverClickHandler}
+        onClick={pageClickHandler}
         style={{
           marginLeft: activated ? "50vw" : "25vw",
           transform: activated ? "rotate(0turn)" : "rotate(0.02turn)",
         }}
       >
-        {props.pages.map((page) => {
-          if (page._id === props.pages.length - 1) {
+        {pages.map((page) => {
+          if (page._id === 0) {
             return (
               <div
                 key={page._id}
                 className={classes.bookCover}
-                onMouseDown={pageClickHandler}
                 style={{
                   transitionDuration: "2s",
                   transform: activated ? "rotateY(.5turn)" : "",
+                  zIndex: currentPage === 0 ? pages.length : 0,
                 }}
               >
                 {currentPage === 0 && (
                   <>
                     <h2
-                      /*style={{fontFamily: selectedFont}}*/ style={{
-                        fontSize: `calc(30px + ${
-                          1 - page.body.length / 100
-                        }em)`,
+                      /*style={{fontFamily: selectedFont}}*/
+                      style={{
+                        fontSize: `calc(5px + ${
+                          4 - page.body.length / 100
+                        }vmin)`,
                       }}
                     >
                       {page.body}
@@ -123,12 +132,13 @@ const Book: React.FC<BookProps> = (props) => {
             return (
               <div
                 className={classes.bookPage}
-                // onMouseUp={() => console.log("UP!", endPoint, swiping)}
-                style={{ zIndex: page._id }}
+                style={{
+                  zIndex: page._id === currentPage ? pages.length : 0,
+                  transform: page._id < currentPage ? "rotateY(.5turn)" : "",
+                }}
                 onMouseDown={pageClickHandler}
                 key={page._id}
               >
-                {/* {currentPage === page._id && ( */}
                 <>
                   <img
                     src={page.img}
@@ -136,7 +146,6 @@ const Book: React.FC<BookProps> = (props) => {
                   />
                   <p>{page.body}</p>
                 </>
-                {/* )} */}
               </div>
             );
         })}
