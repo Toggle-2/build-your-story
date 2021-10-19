@@ -2,10 +2,12 @@ import "./App.css";
 import { useState } from "react";
 import Book from "./components/Book";
 import BookBuilder from "./components/BookBuilder";
-import * as Zin from "./assets/IMG_0329.jpeg";
-import * as Dance from "./assets/IMG_0719.jpeg";
-import * as Cancun from "./assets/IMG_1038.jpeg";
-import * as Couch from "./assets/IMG_1310.jpeg";
+//Will include file upload later where we can gather assets
+
+// import * as Zin from "./assets/IMG_0329.jpeg";
+// import * as Dance from "./assets/IMG_0719.jpeg";
+// import * as Cancun from "./assets/IMG_1038.jpeg";
+// import * as Couch from "./assets/IMG_1310.jpeg";
 
 function App() {
   const [component, setComponent] = useState(0);
@@ -15,10 +17,10 @@ function App() {
     <Book
       //the final item in the array is the cover
       pages={[
-        { _id: 0, body: "My Cool Life", img: Zin.default},
-        { _id: 1, body: "Your story is unique!", img: Dance.default },
-        { _id: 2, body: "Your story is unique!", img: Cancun.default },
-        { _id: 3, body: "Your story is unique", img: Couch.default },
+        { _id: 0, body: "My Cool Life", img: ""/*Zin.default*/},
+        { _id: 1, body: "Your story is unique!", img: ""/*Dance.default*/ },
+        { _id: 2, body: "Your story is unique!", img: ""/*Cancun.default*/ },
+        { _id: 3, body: "Your story is unique", img: ""/*Couch.default*/ },
       ]}
     />,
     <BookBuilder />,
