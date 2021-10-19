@@ -1,6 +1,17 @@
 :root {
   overflow: hidden;
   background: url("./assets/wood.png") top repeat ;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+:root img {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
 
 .App-body {

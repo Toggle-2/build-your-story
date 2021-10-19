@@ -115,7 +115,9 @@
   position: absolute;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
-  transition-duration: 2s;
+  transition: ease-out 1500ms;
+  -moz-transition: ease-out 1500ms;
+  -o-transition: ease-out 1500ms;
   -moz-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -127,21 +129,21 @@
 }
 
 .bookPage img {
-  transition-duration: 2s;
   position: absolute;
   z-index: 2;
   top: 10%;
   left: 2.5%;
-  /* right: auto; */
 }
 
 .bookPage p {
   position: absolute;
-  /* z-index: 2; */
   text-align: left;
   margin: 0 0 0 5vmin;
   font-size: 2vmin;
   top: 67.5%;
+  transition: ease-out 1500ms;
+  -moz-transition: ease-out 1500ms;
+  -o-transition: ease-out 1500ms;
 }
 
 #promptHolder {

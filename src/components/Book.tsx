@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import useDimensions from "../hooks/Dimensions";
+import { useEffect, useRef, useState } from "react";
 import useFlip from "../hooks/Flip";
 import classes from "./book.module.css";
 
@@ -9,17 +8,63 @@ interface BookProps {
   pages: Array<Page>;
 }
 
+interface PageProps extends Page {
+  activePage: number;
+  pages: Array<Page>;
+  mouseDownHandler: () => void;
+  bookBinding: number;
+}
+
+const Page: React.FC<PageProps> = (props) => {
+  const [pageRight, setPageRight] = useState<number>(0);
+  const [show, setShow] = useState<boolean>(true);
+  const { _id, body, img, activePage, pages, mouseDownHandler, bookBinding } =
+    props;
+
+  const PageRef = useRef<HTMLDivElement>(null);
+
+  setTimeout(() => {
+    const right = PageRef.current?.getBoundingClientRect().right;
+    if (typeof right === "number") setPageRight(right);
+  }, 10);
+
+  useEffect(() => {
+    if (pageRight <= bookBinding) {
+      setShow(() => false);
+    } else setShow(true);
+  }, [pageRight, bookBinding]);
+
+  return (
+    <div
+      className={classes.bookPage}
+      style={{
+        zIndex: pages.length - _id,
+        transform: _id < activePage ? "rotateY(.5turn)" : "",
+      }}
+      onMouseDown={mouseDownHandler}
+      ref={PageRef}
+      key={_id}
+    >
+      {show && (
+        <>
+          <img src={img} alt="Please ensure JavaScript is active." />
+          <p>{body}</p>
+        </>
+      )}
+    </div>
+  );
+};
+
 const Book: React.FC<BookProps> = (props) => {
   const [activated, setActivated] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState(0);
-  const { width, height } = useDimensions();
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const {
     innerDimensions,
-    horizontalSwipe,
-    verticalSwipe,
-    swiping,
+    // horizontalSwipe,
+    // verticalSwipe,
+    // swiping,
     startPoint,
-    endPoint,
+    // endPoint,
     mountFlip,
     unmountFlip,
   } = useFlip();
@@ -33,17 +78,17 @@ const Book: React.FC<BookProps> = (props) => {
 
   useEffect(() => {
     const hideContent = setTimeout(() => {
-      if (activated) {
-        setCurrentPage(1);
+      if (currentPage === 1) {
+        setActivated(true);
       }
     }, 550);
     return () => clearTimeout(hideContent);
-  }, [activated]);
+  }, [activated, currentPage]);
 
   const pageClickHandler = () => {
     const clickNextBottomCorner =
       startPoint.y > innerDimensions.height * 0.5 &&
-      startPoint.x > innerDimensions.width;
+      startPoint.x > innerDimensions.width * 0.5;
     const clickNextTopCorner =
       startPoint.y < innerDimensions.height * 0.5 &&
       startPoint.x > innerDimensions.width * 0.5;
@@ -55,25 +100,21 @@ const Book: React.FC<BookProps> = (props) => {
       startPoint.x < innerDimensions.width * 0.5;
 
     if (currentPage === 0) {
-      setActivated(true)
+      setCurrentPage(1);
     } else {
       if (clickNextBottomCorner) {
-        console.log("NEXT_BOTTOM_CORNER");
         if (currentPage !== pages.length - 1) {
           setCurrentPage(currentPage + 1);
         }
       } else if (clickNextTopCorner) {
-        console.log("NEXT_TOP_CORNER");
         if (currentPage !== pages.length - 1) {
           setCurrentPage(currentPage + 1);
         }
       } else if (clickPrevTopCorner) {
-        console.log("PREV_TOP_CORNER");
         if (currentPage !== 1) {
           setCurrentPage(currentPage - 1);
         }
       } else if (clickPrevBottomCorner) {
-        console.log("PREV_BOTTOM_CORNER");
         if (currentPage !== 1) {
           setCurrentPage(currentPage - 1);
         }
@@ -92,8 +133,8 @@ const Book: React.FC<BookProps> = (props) => {
         className={classes.book}
         onClick={pageClickHandler}
         style={{
-          marginLeft: activated ? "50vw" : "25vw",
-          transform: activated ? "rotate(0turn)" : "rotate(0.02turn)",
+          marginLeft: currentPage > 0 ? "50vw" : "25vw",
+          transform: currentPage > 0 ? "rotate(0turn)" : "rotate(0.02turn)",
         }}
       >
         {pages.map((page) => {
@@ -104,14 +145,13 @@ const Book: React.FC<BookProps> = (props) => {
                 className={classes.bookCover}
                 style={{
                   transitionDuration: "2s",
-                  transform: activated ? "rotateY(.5turn)" : "",
-                  zIndex: currentPage === 0 ? pages.length : 0,
+                  transform: currentPage > 0 ? "rotateY(.5turn)" : "",
+                  zIndex: currentPage <= 1 ? pages.length : 0,
                 }}
               >
-                {currentPage === 0 && (
+                {!activated && (
                   <>
                     <h2
-                      /*style={{fontFamily: selectedFont}}*/
                       style={{
                         fontSize: `calc(5px + ${
                           4 - page.body.length / 100
@@ -130,32 +170,27 @@ const Book: React.FC<BookProps> = (props) => {
             );
           } else
             return (
-              <div
-                className={classes.bookPage}
-                style={{
-                  zIndex: page._id === currentPage ? pages.length : 0,
-                  transform: page._id < currentPage ? "rotateY(.5turn)" : "",
-                }}
-                onMouseDown={pageClickHandler}
+              <Page
                 key={page._id}
-              >
-                <>
-                  <img
-                    src={page.img}
-                    alt="Please ensure JavaScript is active."
-                  />
-                  <p>{page.body}</p>
-                </>
-              </div>
+                body={page.body}
+                img={page.img}
+                _id={page._id}
+                pages={props.pages}
+                mouseDownHandler={pageClickHandler}
+                activePage={currentPage}
+                bookBinding={innerDimensions.width * 0.5}
+              />
             );
         })}
+        <div
+          className={classes.bookCover}
+          style={{
+            zIndex: currentPage === pages.length ? pages.length : 0,
+          }}
+        ></div>
       </div>
     </>
   );
 };
 
 export default Book;
-
-/**
- *
- */
