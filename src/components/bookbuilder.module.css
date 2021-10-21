@@ -1,0 +1,164 @@
+@import "../fonts.css";
+
+.builderFab {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: blue;
+  z-index: 5;
+  border: 2px solid rgb(0, 0, 134);
+  width: 80px;
+  height: 80px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+.builderFab:active {
+  box-shadow: 2px 2px black;
+}
+
+.inputDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textarea {
+  width: 50vmin;
+  height: 50vmin;
+  border-radius: 10px;
+  font-size: 2.5vmin;
+  border: 3px solid black;
+  background-color: #eee;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.upload {
+  position: relative;
+  margin: 0 0 2.5vh 0;
+  width: 46vmin;
+  height: 8vmin;
+  border-radius: 10px;
+  font-size: 2.5vmin;
+  text-align: left;
+  border: 3px solid black;
+}
+
+.input {
+  margin: 5vh 5px 2.5vh 5px;
+  width: 45vmin;
+  height: 8vmin;
+  border-radius: 10px;
+  font-size: 2.5vmin;
+  border: 3px solid black;
+  background-color: #eee;
+}
+
+.buttonRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4vh;
+}
+
+.red {
+  border-radius: 10px;
+  position: relative;
+  background-color: red;
+  border: 2px solid rgb(223, 0, 0);
+  margin-right: 5px;
+}
+
+.blue {
+  border-radius: 10px;
+  position: relative;
+  background-color: blue;
+  border: 2px solid rgb(0, 0, 175);
+  margin-right: 5px;
+}
+.yellow {
+  border-radius: 10px;
+  position: relative;
+  background-color: yellow;
+  border: 2px solid rgb(226, 226, 0);
+  margin-right: 5px;
+}
+.orange {
+  border-radius: 10px;
+  position: relative;
+  background-color: orange;
+  border: 2px solid rgb(236, 153, 0);
+  margin-right: 5px;
+}
+.green {
+  border-radius: 10px;
+  position: relative;
+  background-color: green;
+  border: 2px solid rgb(0, 158, 0);
+  margin-right: 5px;
+}
+.violet {
+  border-radius: 10px;
+  position: relative;
+  background-color: violet;
+  border: 2px solid rgb(243, 64, 243);
+  margin-right: 5px;
+}
+.navy {
+  border-radius: 10px;
+  position: relative;
+  background-color: navy;
+  border: 2px solid rgb(5, 5, 100);
+  margin-right: 5px;
+}
+.maroon {
+  border-radius: 10px;
+  position: relative;
+  background-color: maroon;
+  border: 2px solid rgb(109, 10, 10);
+}
+
+h4 {
+  font-size: 3vmin;
+  margin: 0 10px 0 10px;
+}
+
+.fontOne {
+  font-size: 3vmin;
+  font-family: "Rampart One";
+}
+
+.fontTwo {
+  font-size: 3vmin;
+  font-family: "Festive";
+}
+
+.fontThree {
+  font-size: 3vmin;
+  font-family: "Permanent Marker";
+}
+
+.fontFour {
+  font-size: 3vmin;
+  font-family: "Alfa Slab";
+}
+
+@media screen and (min-width: 1200) {
+  .stylesDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+  }
+}
+
+@media only screen and (max-width: 1199) {
+  .stylesDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

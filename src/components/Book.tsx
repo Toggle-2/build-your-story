@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+// import StylesContext from "context/styles-context";
+import StylesContext from "context/styles-context";
+import { useContext, useEffect, useRef, useState } from "react";
 import useFlip from "../hooks/Flip";
 import classes from "./book.module.css";
 
@@ -22,6 +24,8 @@ const Page: React.FC<PageProps> = (props) => {
     props;
 
   const PageRef = useRef<HTMLDivElement>(null);
+
+  // const styles = useContext(StylesContext);
 
   setTimeout(() => {
     const right = PageRef.current?.getBoundingClientRect().right;
@@ -122,6 +126,8 @@ const Book: React.FC<BookProps> = (props) => {
     }
   };
 
+  const styles = useContext(StylesContext);
+
   return (
     <>
       {!activated && (
@@ -144,6 +150,7 @@ const Book: React.FC<BookProps> = (props) => {
                 key={page._id}
                 className={classes.bookCover}
                 style={{
+                  backgroundColor: styles.colors.coverColor,
                   transitionDuration: "2s",
                   transform: currentPage > 0 ? "rotateY(.5turn)" : "",
                   zIndex: currentPage <= 1 ? pages.length : 0,
@@ -153,6 +160,8 @@ const Book: React.FC<BookProps> = (props) => {
                   <>
                     <h2
                       style={{
+                        color: styles.colors.fontColor,
+                        fontFamily: styles.font,
                         fontSize: `calc(5px + ${
                           4 - page.body.length / 100
                         }vmin)`,
