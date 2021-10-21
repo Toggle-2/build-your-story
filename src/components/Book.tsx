@@ -38,6 +38,8 @@ const Page: React.FC<PageProps> = (props) => {
     } else setShow(true);
   }, [pageRight, bookBinding]);
 
+  const styles = useContext(StylesContext);
+
   return (
     <div
       className={classes.bookPage}
@@ -52,7 +54,7 @@ const Page: React.FC<PageProps> = (props) => {
       {show && (
         <>
           <img src={img} alt="Please ensure JavaScript is active." />
-          <p>{body}</p>
+          <p style={{fontFamily: styles.font}}>{body}</p>
         </>
       )}
     </div>

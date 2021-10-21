@@ -4,7 +4,6 @@ import Book from "./components/Book";
 import BookBuilder, { BookBuilderFab } from "./components/BookBuilder";
 //Will include file upload later where we can gather assets
 
-
 function App() {
   const [buildMode, setBuildMode] = useState(false);
 
@@ -13,14 +12,14 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{background: buildMode ? "beige" : "" }}>
         <BookBuilderFab clickHandler={toggleBuildMode} activated={buildMode} />
         <div className="App-body">
           {buildMode ? (
             <BookBuilder />
           ) : (
             <Book
-              pages={[/*We will pass our objects stored in state here*/]}
+              pages={[]}
             />
           )}
         </div>
@@ -29,4 +28,3 @@ function App() {
 }
 
 export default App;
-

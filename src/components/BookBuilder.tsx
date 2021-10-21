@@ -45,8 +45,6 @@ const BookBuilder: React.FC = () => {
   //   const { width, height } = useDimensions();
   const styles = useContext(StylesContext);
 
-  
-
   return (
     <form>
       <div className={classes.inputDiv}>
@@ -56,63 +54,88 @@ const BookBuilder: React.FC = () => {
         <button
           className={classes.red}
           type="button"
-          onClick={() => styles.changeColors({coverColor: "red", fontColor: "black"})}
+          style={{ opacity: styles.colors.coverColor == "red" ? 1 : "" }}
+          onClick={() =>
+            styles.changeColors({ coverColor: "red", fontColor: "black" })
+          }
         />
         <button
           className={classes.blue}
           type="button"
-          onClick={() => styles.changeColors({coverColor: "blue", fontColor: "black"})}
+          style={{ opacity: styles.colors.coverColor == "blue" ? 1 : "" }}
+          onClick={() =>
+            styles.changeColors({ coverColor: "blue", fontColor: "black" })
+          }
         />
         <button
           className={classes.yellow}
           type="button"
-          onClick={() => styles.changeColors({coverColor: "yellow", fontColor: "black"})}
+          style={{ opacity: styles.colors.coverColor == "yellow" ? 1 : "" }}
+          onClick={() =>
+            styles.changeColors({ coverColor: "yellow", fontColor: "black" })
+          }
         />
         <button
           className={classes.orange}
           type="button"
-          onClick={() => styles.changeColors({coverColor: "orange", fontColor: "black"})}
+          style={{ opacity: styles.colors.coverColor == "orange" ? 1 : "" }}
+          onClick={() =>
+            styles.changeColors({ coverColor: "orange", fontColor: "black" })
+          }
         />
         <button
           className={classes.green}
           type="button"
-          onClick={() => styles.changeColors({coverColor: "green", fontColor: "black"})}
+          style={{ opacity: styles.colors.coverColor == "green" ? 1 : "" }}
+          onClick={() =>
+            styles.changeColors({ coverColor: "green", fontColor: "black" })
+          }
         />
         <button
           className={classes.violet}
           type="button"
-          onClick={() => styles.changeColors({coverColor: "violet", fontColor: "black"})}
+          style={{ opacity: styles.colors.coverColor == "violet" ? 1 : "" }}
+          onClick={() =>
+            styles.changeColors({ coverColor: "violet", fontColor: "black" })
+          }
         />
         <button
           className={classes.navy}
           type="button"
-          onClick={() => styles.changeColors({coverColor: "navy", fontColor: "gold"})}
+          style={{ opacity: styles.colors.coverColor == "navy" ? 1 : "" }}
+          onClick={() =>
+            styles.changeColors({ coverColor: "navy", fontColor: "gold" })
+          }
         />
         <button
           className={classes.maroon}
           type="button"
-          onClick={() => styles.changeColors({coverColor: "maroon", fontColor: "gold"})}
+          style={{ opacity: styles.colors.coverColor == "maroon" ? 1 : "" }}
+          onClick={() =>
+            styles.changeColors({ coverColor: "maroon", fontColor: "gold" })
+          }
         />
       </div>
 
       <div className={classes.inputDiv}>
-        <input
-          className={classes.input}
-          onBlur={() => {}}
-          onInput={() => {}}
-          placeholder="Add the story title."
-          //   ref={titleRef}
-          //   value={title}
-        />
+        <div className={classes.stylingWrapper}>
+          <input
+            onBlur={() => {}}
+            onInput={() => {}}
+            placeholder="Add the story title."
+            //   ref={titleRef}
+            //   value={title}
+          />
+        </div>
+        <div className={classes.stylingWrapper}>
+          <button type="button" onClick={() => {}} className={classes.upload}>
+            Upload Image
+          </button>
+        </div>
       </div>
-      <div className={classes.inputDiv}>
-        <button type="button" onClick={() => {}} className={classes.upload}>
-          Upload Image
-        </button>
-      </div>
+
       <div className={classes.inputDiv}>
         <textarea
-          className={classes.textarea}
           onBlur={() => {}}
           onInput={() => {}}
           placeholder="Tap to add text!"
@@ -121,16 +144,43 @@ const BookBuilder: React.FC = () => {
           // autoGrow={true}
           // defaultValue={pagesValues[index]}
         />
+        <div className={classes.imgCard}>
+          <img src="" alt="Uploaded image" />
+        </div>
       </div>
 
       <div className={classes.inputDiv}>
         <h2>Select your book's font!</h2>
       </div>
       <div className={classes.inputDiv}>
-        <h4 className={classes.fontOne}>Font Demo</h4>
-        <h4 className={classes.fontTwo}>Font Demo</h4>
-        <h4 className={classes.fontThree}>Font Demo</h4>
-        <h4 className={classes.fontFour}>Font Demo</h4>
+        <h4
+          className={classes.fontOne}
+          style={{ textShadow: styles.font == "Rampart One" ? "4px 4px 10px gold" : "" }}
+          onClick={() => styles.changeFont("Rampart One")}
+        >
+          Font Demo
+        </h4>
+        <h4
+          className={classes.fontTwo}
+          onClick={() => styles.changeFont("Festive")}
+          style={{ textShadow: styles.font == "Festive" ? "4px 4px 10px gold" : "" }}
+        >
+          Font Demo
+        </h4>
+        <h4
+          className={classes.fontThree}
+          onClick={() => styles.changeFont("Permanent Marker")}
+          style={{ textShadow: styles.font == "Permanent Marker" ? "4px 4px 10px gold" : "" }}
+        >
+          Font Demo
+        </h4>
+        <h4
+          className={classes.fontFour}
+          onClick={() => styles.changeFont("Alfa Slab")}
+          style={{ textShadow: styles.font == "Alfa Slab" ? "4px 4px 10px gold" : "" }}
+        >
+          Font Demo
+        </h4>
       </div>
     </form>
   );
